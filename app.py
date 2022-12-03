@@ -1,14 +1,20 @@
-from flask import Flask, request, abort
+from flask import Flask, request, abort, jsonify
 import ipaddress
+
+from anything import anything
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'Hello World'
+    word = anything()
+    return jsonify(
+      title = "QTitle",
+      word = word
+    )
 
 
-ALLOW_NETWORKS = [""]
+ALLOW_NETWORKS = ["192.168.3.4"]
 
 @app.before_request
 def before_request():
